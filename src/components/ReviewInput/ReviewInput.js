@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { BASE_URL } from '../../config';
 
 import './ReviewInput.scss';
 
@@ -29,7 +30,7 @@ class ReviewInput extends Component {
     this.props.history.push(
       `/products/${this.props.location.state.product_id}`
     );
-    fetch('http://10.58.3.134:8000/postings', {
+    fetch(`${BASE_URL}/postings`, {
       headers: { Authorization: localStorage.getItem('token') },
 
       method: 'POST',

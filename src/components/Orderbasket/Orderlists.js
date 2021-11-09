@@ -1,6 +1,7 @@
 import React from 'react';
 import Orderproduct from './Orderproduct';
 import '../../components/Orderbasket/Orderlists.scss';
+import { BASE_URL } from '../../config';
 
 class Orderlists extends React.Component {
   constructor() {
@@ -11,7 +12,7 @@ class Orderlists extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://10.58.3.134:8000/orders/cart', {
+    fetch(`${BASE_URL}/orders/cart`, {
       headers: { Authorization: localStorage.getItem('token') },
     })
       .then(res => res.json())

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
+import { BASE_URL } from '../../../config';
 
 import './ReplyInput.scss';
 
@@ -13,7 +14,7 @@ class Reply extends PureComponent {
   };
 
   reviewInput = () => {
-    fetch('http://10.58.3.134:8000/postings/comments', {
+    fetch(`${BASE_URL}/postings/comments`, {
       headers: { Authorization: localStorage.getItem('token') },
       method: 'POST',
       body: JSON.stringify({

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { BASE_URL } from '../../../config';
 
 import './Options.scss';
 
@@ -14,8 +15,8 @@ class Options extends Component {
       cartsize: '',
       count: 0,
       countprice: 0,
-      activeBtnByColor: 'gray_btn',
-      activeBtnBySize: 'gray_btn',
+      activeBtnByColor: 0,
+      activeBtnBySize: 0,
     };
   }
 
@@ -26,6 +27,7 @@ class Options extends Component {
       countprice: (this.props.price * count).toLocaleString('ko-KR'),
     });
   };
+
   handleminus = e => {
     const count = this.state.count - 1;
     const countprice = this.props.price * count;
@@ -36,7 +38,6 @@ class Options extends Component {
   };
 
   changeByTargetNameColor = (e, idx) => {
-    e.target.className = 'black';
     this.setState({
       targetnamecolor: e.target.name,
       cartcolor: '- ' + e.target.name.toUpperCase() + ' /',
@@ -53,7 +54,7 @@ class Options extends Component {
   };
 
   goToCart = () => {
-    fetch('http://10.58.3.134:8000/orders/cart', {
+    fetch(`${BASE_URL}/orders/cart`, {
       method: 'POST',
       headers: { Authorization: localStorage.getItem('token') },
       body: JSON.stringify({
@@ -73,16 +74,15 @@ class Options extends Component {
       });
   };
 
-  notIsValidOption = (count, cartcolor, cartsize) => {
-    return count > 0 && cartcolor !== '' && cartsize !== '' ? false : true;
+  isValidOption = (count, cartcolor, cartsize) => {
+    return count > 0 && cartcolor !== '' && cartsize !== '';
   };
+
   render() {
     const { name, colors, size, price } = this.props;
     const {
       targetnamecolor,
       count,
-      size_name,
-      color_name,
       targetnamesize,
       cartcolor,
       cartsize,
@@ -104,7 +104,7 @@ class Options extends Component {
             name={item}
             onClick={e => this.changeByTargetNameColor(e, idx)}
             className={
-              this.state.activeBtnByColor == idx ? 'black_btn' : 'gray_btn'
+              this.state.activeBtnByColor === idx ? 'black_btn' : 'gray_btn'
             }
           >
             {item.toUpperCase()}
@@ -119,7 +119,7 @@ class Options extends Component {
           <button
             name={item}
             className={
-              this.state.activeBtnBySize == idx ? 'black_btn' : 'gray_btn'
+              this.state.activeBtnBySize === idx ? 'black_btn' : 'gray_btn'
             }
             onClick={e => this.changeByTargetNameSize(e, idx)}
           >
@@ -162,7 +162,7 @@ class Options extends Component {
           <button
             className="cart"
             onClick={this.goToCart}
-            disabled={this.notIsValidOption(count, cartcolor, cartsize)}
+            disabled={!this.isValidOption(count, cartcolor, cartsize)}
           >
             <i className="fas fa-cart-plus"></i>
           </button>

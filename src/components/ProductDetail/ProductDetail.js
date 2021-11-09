@@ -5,7 +5,7 @@ import Reviews from './Reviews/Reviews';
 
 import './ProductDetail.scss';
 import './Reviews/Review.scss';
-// import { BASE_URL } from 'react';
+import { BASE_URL } from '../../config';
 
 class ProductDetail extends Component {
   constructor() {
@@ -14,13 +14,12 @@ class ProductDetail extends Component {
       goods_detail: [],
       category: [],
       filterdFunction: [],
-      isReviewInputPopup: false,
       content_writer: '',
     };
   }
 
   componentDidMount() {
-    fetch(`http://10.58.3.134:8000/products/${this.props.match.params.id}`)
+    fetch(`${BASE_URL}/products/${this.props.match.params.id}`)
       .then(res => res.json())
       .then(data => {
         this.setState({

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 class Goods extends Component {
-  goToSubject = () => {};
   render() {
     const { name, price, review_count, img_urls, id } = this.props.item;
     return (

@@ -4,14 +4,10 @@ import ReplyInput from './ReplyInput';
 import './Replys.scss';
 
 class Replys extends Component {
-  constructor() {
-    super();
-  }
-
   render() {
     return (
       <>
-        <div className="replys_wrapper" ref={this.messagesEndRef}>
+        <div className="replys_wrapper">
           {this.props.replys.map(reply => (
             <Reply
               key={reply.comment_id}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { BASE_URL } from '../../../config';
 
 import './Reply.scss';
 
@@ -19,13 +20,10 @@ class Reply extends Component {
   replyDelete = () => {
     this.props.onDelete(this.props.reply);
 
-    fetch(
-      `http://10.58.3.134:8000/postings/comments/${this.state.comment_id}`,
-      {
-        headers: { Authorization: localStorage.getItem('token') },
-        method: 'delete',
-      }
-    )
+    fetch(`${BASE_URL}/postings/comments/${this.state.comment_id}`, {
+      headers: { Authorization: localStorage.getItem('token') },
+      method: 'delete',
+    })
       .then(response => response.json())
       .then(result => {
         if (result.message === 'INVALID_USER') {
