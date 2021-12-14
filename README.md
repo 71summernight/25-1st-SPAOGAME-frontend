@@ -25,7 +25,6 @@
 
 ## ⚙ 적용 기술
 - **Front-End** : React with Javascript, HTML5, CSS3, SASS
-- **Back-End** : Python, Django, MySQL, jwt, bcypt, AWS RDS, AWS EC2
 - **Common** : Git, Github, Slack, Trello, Postman or Insomnia
 
 ## 🗜 데이터베이스 DIAGRAM
